@@ -1,58 +1,62 @@
 import java.util.ArrayList;
-public class Permutations {
+
+public class Permutations{
 	
-	public static ArrayList<ArrayList<Integer>> perm(int[] A){
-		ArrayList<ArrayList<Integer>> permutations = new ArrayList<ArrayList<Integer>>();
-		ArrayList<Integer> first = new ArrayList<Integer>();
-		for (int i=0;i<A.length;i++){
-			first.add(A[i]);
-		}
+	public static ArrayList<ArrayList<Integer>> permute(int[] A){
 		
-		int i = 0;
-		for (int j =0;j<A.length;j++){
-			ArrayList<Integer> temp = (ArrayList<Integer>)first.clone();
-			temp = swap(temp, i, j);
-			System.out.println(temp);
-			generatePerm(permutations, temp,1);
-		}
+		ArrayList<ArrayList<Integer>> all = new ArrayList<ArrayList<Integer>>();
+		outergenerate(all,A,0);
 		
-		return permutations;
+		return all ;
 	}
 	
-	public static void generatePerm(ArrayList<ArrayList<Integer>> permutations, ArrayList<Integer> A, int start){
+	public static void generate(ArrayList<ArrayList<Integer>> all, int[] A, int start){
 		
-		if (start==A.size()-1){
+		if (all.contains(convert(A))){
 			return;
 		}
-
-		for(int i=start;i<A.size();i++){
-			for(int j=i+1; j<A.size();j++){
-//				System.out.println("i is " + i);
-//				System.out.println("j is " + j);
-				ArrayList<Integer> temp = (ArrayList<Integer>) A.clone();
-				temp = swap(temp,i,j); //this will change our reference b/c it is swapped....
-				System.out.println(temp);
-				permutations.add(temp);
-				
-				generatePerm(permutations,temp,start+1);
+		all.add(convert(A));
+		for(int i=start+1;i<A.length;i++){
+			for(int j=i+1;j<A.length;j++){
+				swap(A,i,j);
+				generate(all,A,start+1);
+				swap(A,i,j);
 			}
-			
 		}
+		
 		return;
 	}
 	
-	
-	public static ArrayList<Integer> swap(ArrayList<Integer> A, int i, int j){
+	public static void outergenerate(ArrayList<ArrayList<Integer>> all, int[] A, int start){
+		int i =0;
+		for (int j=0;j<A.length;j++){
+			swap(A,i,j);
+			generate(all,A,start);
+			swap(A,i,j);
+		}
 		
-		int tmp = A.get(i);
-		A.set(i,A.get(j));
-		A.set(j,tmp);
-		return A;
+		
 	}
 	
+	public static void swap(int[] A,int i,int j){
+		int temp = A[i];
+		A[i] = A[j];
+		A[j] = temp;
+		return;
+	}
+	
+	public static ArrayList<Integer> convert(int[] A){
+		ArrayList<Integer> res = new ArrayList<Integer>();
+		for (int i=0; i<A.length;i++){
+			res.add(A[i]);
+		}
+		return res;
+	}
+	
+
 	public static void main(String args[]){
-		int[] A= {1,2,3,4};
+		int[] A = {1,2,3,4,5};
+		System.out.println(Permutations.permute(A));
 		
-		System.out.print(Permutations.perm(A));
 	}
 }
