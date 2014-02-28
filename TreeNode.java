@@ -32,6 +32,17 @@ public class TreeNode {
 
       }
       
+      public void inorder(TreeNode root){
+    	  if (root ==null){
+    		  return;
+    	  }
+    	  
+    	  inorder(root.left);
+    	  System.out.print(root.val);
+    	  inorder(root.right);
+    	  
+      }
+      
 	  public void flip(TreeNode a){
 	        if (a==null){
 	            return;
