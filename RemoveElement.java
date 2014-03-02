@@ -1,42 +1,38 @@
 public class RemoveElement {
-    public static int removeElement(int[] A, int elem) {
-        
-        if (A.length == 0){
+	public int removeElement(int[] A, int elem) {
+        if (A.length==0){
             return 0;
         }
-        
         int i = 0;
-        int j = A.length - 1;
-        int count = 0;
+        int j = A.length-1;
+        int c = 0;
         
-        while (i <= j){
-            while(A[i]==elem && i<=j){
-                if(A[j]==elem){
-                    j--;
-                    count++;
-                }else{
-                    swap(A,i,j);
-                    j--;
-                    count++;
-
-                }
-
+        while(i<j){
+            if (A[i]==elem){
+               while(A[j]== elem&&j>i){
+                   j--;
+               }
+               swap(A,i,j);
+               j--;
             }
             i++;
+            if(A[c]!=elem){
+                c++;
+            }
         }
-
-        return A.length - count;
+        if (A[i]==elem){
+            return c;
+        }
+        return c+1;
     }
     
-    public static void swap(int[] A,int i,int j){
+    public void swap(int[] A, int i, int j){
+        if (i==j){
+            return;
+        }
         int tmp = A[i];
         A[i] = A[j];
         A[j] = tmp;
-    }
-    
-    public static void main(String args[]){
-    	int[] A = {1,1,3,1};
-    	System.out.print(RemoveElement.removeElement(A, 1));
     }
     
 }

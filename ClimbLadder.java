@@ -24,7 +24,7 @@ public class ClimbLadder {
 	    }
 	    
 	    public static void main(String args[]){
-	    	int n = 3;
-	    	System.out.println(ClimbLadder.climbStairs(n));
+	    	int n = 4;
+	    	System.out.println(ClimbLadder.climbStairs(4));
 	    }
 }
