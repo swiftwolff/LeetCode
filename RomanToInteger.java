@@ -17,7 +17,6 @@ public class RomanToInteger {
 				carray[j+1] = 'Z';
 			}
 		}
-		
 		return res;
 	}
 	

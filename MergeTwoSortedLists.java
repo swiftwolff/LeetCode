@@ -11,21 +11,21 @@ public class MergeTwoSortedLists {
 		ListNode tmpone = null;
 		ListNode tmptwo = null;
 		int h = 0;
-		if (l1.val<l2.val){
+		if (l1.val<=l2.val){
 			h=0;
 		}else{
 			h=1;
 		}
 		while(headone!=null && headtwo!=null){
 			if (headone.val<=headtwo.val){
-				while(headone.val<=headtwo.val&&headone!=null){
+				while(headone!=null&&headone.val<=headtwo.val){
 					tmpone = headone;
 					headone=headone.next;
 				}
 				tmpone.next = headtwo;
 			}
 			else{
-				while(headone.val>headtwo.val&&headtwo!=null){
+				while(headtwo!=null&&headone.val>headtwo.val){
 					tmptwo = headtwo;
 					headtwo = headtwo.next;
 				}
