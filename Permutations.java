@@ -2,61 +2,52 @@ import java.util.ArrayList;
 
 public class Permutations{
 	
-	public static ArrayList<ArrayList<Integer>> permute(int[] A){
-		
+	public static ArrayList<ArrayList<Integer>> permute(int[] num) {
 		ArrayList<ArrayList<Integer>> all = new ArrayList<ArrayList<Integer>>();
-		outergenerate(all,A,0);
+		if (num.length==0||num.length==1){
+			return all;
+		}
 		
-		return all ;
-	}
+		if (num.length==1){
+			all.add(saveToArray(num));
+			return all;
+		}
+		
+		build(num,0,num.length,all);
+		return all;
+    }
 	
-	public static void generate(ArrayList<ArrayList<Integer>> all, int[] A, int start){
-		
-		if (all.contains(convert(A))){
-			return;
-		}
-		all.add(convert(A));
-		for(int i=start+1;i<A.length;i++){
-			for(int j=i+1;j<A.length;j++){
-				swap(A,i,j);
-				generate(all,A,start+1);
-				swap(A,i,j);
-			}
+	public static void build(int[] num, int k, int n,ArrayList<ArrayList<Integer>> all){
+		if (k==n){
+			all.add(saveToArray(num));
 		}
 		
-		return;
-	}
-	
-	public static void outergenerate(ArrayList<ArrayList<Integer>> all, int[] A, int start){
-		int i =0;
-		for (int j=0;j<A.length;j++){
-			swap(A,i,j);
-			generate(all,A,start);
-			swap(A,i,j);
+		for (int i=k;i<n;i++){
+			swap(num,i,k);
+			build(num,k+1,n,all);
+			swap(num,i,k);
 		}
-		
 		
 	}
 	
-	public static void swap(int[] A,int i,int j){
-		int temp = A[i];
+	public static void swap(int[] A,int i, int j){
+		int tmp = A[i];
 		A[i] = A[j];
-		A[j] = temp;
-		return;
+		A[j] = tmp;
 	}
 	
-	public static ArrayList<Integer> convert(int[] A){
+	public static ArrayList<Integer> saveToArray(int[] num){
 		ArrayList<Integer> res = new ArrayList<Integer>();
-		for (int i=0; i<A.length;i++){
-			res.add(A[i]);
+		for (int i=0;i<num.length;i++){
+			res.add(num[i]);
 		}
 		return res;
 	}
-	
 
 	public static void main(String args[]){
-		int[] A = {1,2,3,4,5};
-		System.out.println(Permutations.permute(A));
+		int[] A = {1,2,3,4};
+//		permute(A);
+		System.out.println(permute(A).size());
 		
 	}
 }
