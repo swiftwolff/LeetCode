@@ -1,67 +1,54 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 public class GenerateParentheses {
-	
 	public static ArrayList<String> generateParenthesis(int n) {
-
-		String p = "()";
-		ArrayList<String> parenth = new ArrayList<String>();
-		String tmp = "";
-		for (int i=0;i<n;i++){
-			tmp += p;
-		}
-
-		generatehelperII(parenth,tmp);
-        return parenth;
-    }
+        
+	      ArrayList<String> res = new ArrayList<String>();
+	      if (n<=0){
+	          return res;
+	      }
+	      String parenth = "";
+	      for (int i=0;i<n;i++){
+	          parenth += "()";
+	      }
+	      
+	      char[] parenthArry = parenth.toCharArray();
+	      HashMap<String,Integer> table = new HashMap<String,Integer>();
+	      generate(parenthArry,res,table);
+	      return res;
+	      
+	    }
+	    
+	    public static void generate(char[] parenthArry, ArrayList<String> res, HashMap<String,Integer> table){
+	        
+	        String tmp = new String(parenthArry);
+	        if(table.get(tmp)!=null){
+	            return;
+	        }
+	        table.put(tmp,0);
+	        res.add(tmp);
 	
-	public static void generatehelper(ArrayList<String> parenth,String input){
-		
-		char[] c = input.toCharArray();
-		for (int i=0;i<c.length-1;i++){
-			if (c[i]==')' && c[i+1]=='('){
-				String tmp = swap(c,i,i+1);
-				if (parenth.contains(tmp)){
-					return;
-				}
-				parenth.add(tmp);
-				
-				generatehelper(parenth,tmp);
-			}
-		}
-		
-		
-		return;
-	}
-	
-	public static String generatehelperII(ArrayList<String> parenth,String input){
-		
-		parenth.add(input);
-		char[] c = input.toCharArray();
-		for (int i=0;i<c.length-1;i++){
-			if (c[i]==')' && c[i+1]=='('){
-				String tmp = swap(c,i,i+1);
-				if (parenth.contains(tmp)){
-					continue;
-				}
-				generatehelperII(parenth,tmp);
-			}
-		}
-		
-		return input;
-		
-	}
-	
-	public static String swap(char[] c,int i, int j){
-		char[] temp = c.clone();
-		char tmp = temp[i];
-		temp[i] = temp[j];
-		temp[j] = tmp;
+	        for (int j=0;j<parenthArry.length;j++){
+	          if (j==parenthArry.length-1){
+	              break;
+	          }
+	          if(parenthArry[j]==')'&&parenthArry[j+1]=='('){
+	              swap(parenthArry,j,j+1);
+	              generate(parenthArry,res,table);
+	              swap(parenthArry,j,j+1);
+	          }
+	        }
+	        return;
+	    }
+	    
+	    public static void swap(char[] A,int i,int j){
+	        char tmp = A[i];
+	        A[i] = A[j];
+	        A[j] = tmp;
+	    }
 
-		return new String(temp);
-		
-	}
 	
 	public static void main(String args[]){
-		System.out.println(GenerateParentheses.generateParenthesis(0));
+		System.out.println(generateParenthesis(3));
 	}
 }
