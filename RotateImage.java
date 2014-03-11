@@ -4,20 +4,23 @@ public class RotateImage {
 		if (square.length==0){
 			return;
 		}
-		int n = square.length;
 		int first;
 		int last;
-		int tmp;
-		for(int layer=0;layer<n/2;layer++){
+		int offset;
+		for(int layer=0;layer<square.length/2;layer++){
 			first = layer;
-			last = n-1-layer;
-			for (int i=first;i<last;i++){
-				tmp = square[first][first];
-				square[first][first] = square[last][first];
-				square[last][first] = square[last][last];
-				square[last][last] = square[first][last];
-				square[first][last] = tmp;
+			last = square.length-1-layer;
+			
+			for(int i=first;i<last;i++){
+				offset = i-first;
+				
+				int tmp = square[first][i];
+				square[first][i] = square[last-offset][first];
+				square[last-offset][first] = square[last][last-offset];
+				square[last][last-offset] = square[i][last];
+				square[i][last] = tmp;
 			}
+			
 		}
 	}
 	

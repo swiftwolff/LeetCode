@@ -2,44 +2,43 @@
 public class MinimumPathSum {
 	
 	public static int minPathSum(int[][] grid) {
-		if(grid.length==0||grid[0].length==0){
+		
+		if (grid.length==0||grid[0].length==0){
 			return 0;
-		}		
-		int x = grid[0].length;
-		int y = grid.length;	
-		int i = 0;
+		}
+		
+		int[][] sumgrid = new int[grid.length][grid[0].length];
 		int j = 0;
-		int sum = 0;
-		while(i<x&&j<y){
-			sum+= grid[j][i];
-			if(i==x-1){
-				j++;
-				continue;
-			}
-			if(j==y-1){
-				i++;
-				continue;
-			}
-			if(less(grid,j+1,i,j,i+1)){
-				j++;
-			}else if(grid[j+1][i]==grid[j][i+1]){
-				continue;
+		sumgrid[0][0] = grid[0][0];
+		//horizontal
+		for (int i=1;i<grid[0].length;i++){
+			sumgrid[j][i] = grid[j][i]+sumgrid[j][i-1];
+		}
+		//vertical
+		for (int k=1;k<grid.length;k++){
+			sumgrid[k][j] = grid[k][j]+sumgrid[k-1][j];
+		}
+		
+		if(grid.length==1||grid[0].length==1){
+			return sumgrid[grid.length-1][grid[0].length-1];
+		}
+		int x = 1;
+		int y = 1;
+
+		while(x<grid[0].length && y<grid.length){
+			sumgrid[y][x] = grid[y][x]+Math.min(grid[y-1][x], grid[y][x-1]);
+			if(x+1==grid[0].length){
+				y++;
+				x--;
 			}else{
-				i++;
+				x++;
 			}
 		}
-        return sum;
+		return sumgrid[grid.length-1][grid[0].length-1];
     }
 	
-	public static boolean less(int[][] grid, int i, int j,int itwo,int jtwo){
-		if(grid[i][j]>grid[itwo][jtwo]){
-			return false;
-		}
-		return true;
-	}
-	
 	public static void main(String args[]){
-		int[][] grid = {{2,1,6},{8,4,9}};
+		int[][] grid = {{8},{9},{10}};
 		System.out.println(minPathSum(grid));
 	}
 }

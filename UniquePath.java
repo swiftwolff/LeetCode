@@ -1,19 +1,35 @@
 public class UniquePath {
 	
 	public static int unique(int m,int n){
+		int[][] grid =new int[m][n];
 		
-		return factorial(m-1+n-1)/(factorial(m-1)*factorial(n-1));
-	}
-	
-	public static int factorial(int n){
-		if (n==0){
-			return 1;
+		for(int i=0;i<m;i++){
+			grid[0][i] = 1;
 		}
-		return n*factorial(n-1);
+		for (int j=0;j<n;j++){
+			grid[j][0] = 1;
+		}
+		
+		
+		int x = 1;
+		int y = 1;
+		
+		while(x<m && y<n){
+			grid[y][x] = grid[y-1][x]+grid[y][x-1];
+			if (x+1==m){
+				y++;
+				x--;
+			}else{
+				x++;
+			}
+		}
+		
+		return grid[m-1][n-1];
 	}
 	
 	
 	public static void main(String args[]){
-		System.out.println(UniquePath.unique(2,2));
+
+		System.out.println(unique(3,3));
 	}
 }
