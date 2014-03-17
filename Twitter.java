@@ -23,10 +23,14 @@ public class Twitter {
 	public static int solutionTwo(int[] A, int N){
 		int out = 0;
 		for(int i=0;i<N;i++){
-			
-			if(i+A[i]<0||i+A[i]>0||A[i+A[i]]==A[i]){
+			if(i==N-1&&(i+A[i]>0&&i+A[i]<N-1)){
 				out+=1;
 			}
+			if(i!=N-1&&(i+A[i]<0||i+A[i]>N-1)){
+				out+=1;
+			}
+		
+			
 			
 		}
 		return out;
