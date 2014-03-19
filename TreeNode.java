@@ -54,6 +54,15 @@ public class TreeNode {
     	  
       }
       
+      public void postorder(TreeNode root){
+    	  if(root==null){
+    		  return;
+    	  }
+    	  postorder(root.left);
+    	  postorder(root.right);
+    	  System.out.println(root.val);
+      }
+      
 	  public void flip(TreeNode a){
 	        if (a==null){
 	            return;

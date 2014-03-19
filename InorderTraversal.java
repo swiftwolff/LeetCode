@@ -33,20 +33,15 @@ public class InorderTraversal {
 	public static void main(String args[]){
 		  TreeNode a = new TreeNode(1);
 	  	  TreeNode b = new TreeNode(2);
-	  	  TreeNode c = new TreeNode(3);
-	  	  TreeNode d = new TreeNode(4);
+	  	  TreeNode c = new TreeNode(4);
+	  	  TreeNode d = new TreeNode(3);
 	  	  TreeNode e = null;
 	  	  TreeNode f = new TreeNode(5);
-	  	  TreeNode g = null;
-	  	  TreeNode i = null;
-	  	  TreeNode j = new TreeNode(6);
-	  	  TreeNode[] t = {b,c,d,e,f,g,i,j};
+	  	  TreeNode g = new TreeNode(6);
+	  	  TreeNode[] t = {b,c,d,e,f,g};
 	  	  a.insert(t, a);
 	  	  a.inorder(a);
-	  	  
-	  	  System.out.println(InorderTraversal.inorder(a));
-	  	  
-	  	  
+	  	    
 	  	  
 	}
 }
