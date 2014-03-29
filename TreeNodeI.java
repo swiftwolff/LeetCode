@@ -4,16 +4,19 @@ public class TreeNodeI {
 	TreeNodeI left;
 	TreeNodeI right;
 	TreeNodeI next;
+	TreeNodeI parent;
 	TreeNodeI(int num){
 		val = num;
 	}
 	
 	public void setLeftChild(TreeNodeI node){
 		left = node;
+		left.parent = this;
 	}
 	
 	public void setRightChild(TreeNodeI node){
 		right = node;
+		right.parent = this;
 	}
 	
 	public static void main(String args[]){
