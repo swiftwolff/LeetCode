@@ -20,8 +20,6 @@ public class LCM {
 		return (x*y)/gcomd;
 	}
 	
-	
-	
 	public static void main(String args[]){
 		System.out.println(lcm(11,7));
 	}
