@@ -15,6 +15,9 @@ public class ThreeSum {
 			negate = -arry[i];
 			start = i+1;
 			end = arry.length-1;
+			if(i > 0&&arry[i]==arry[i-1]){
+				continue;
+			}
 			while(start < end){
 				if(arry[start] + arry[end] == negate){
 					ArrayList<Integer> tmp = new ArrayList<Integer>();				
@@ -46,6 +49,7 @@ public class ThreeSum {
 	
 	public static void main(String args[]){
 		int[] A = {-2,-1,0,1,1};
-		System.out.println(ThreeSumFind(A));
+		int[] B = {0,0,0,0};
+		System.out.println(ThreeSumFind(B));
 	}
 }
