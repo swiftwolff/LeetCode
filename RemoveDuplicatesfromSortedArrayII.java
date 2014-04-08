@@ -10,7 +10,7 @@ public class RemoveDuplicatesfromSortedArrayII {
 	        int cur = 2;
 	        
 	        while(cur <= A.length-1){
-	            if(A[prev]==A[cur] && A[prev-1]==A[cur]){
+	            if(A[prev]==A[cur] && A[prev-1]==A[cur]){  //we need to check prev-1 too
 	                cur++;
 	            }else{
 	                prev++;
