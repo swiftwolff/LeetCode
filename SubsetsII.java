@@ -1,15 +1,18 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 
 public class SubsetsII {
 	public static ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
+		
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> tmp = new ArrayList<Integer>();
         res.add(tmp);
         if(num.length==0){
         	return res;
         }
+        Arrays.sort(num);
         subsetsWithDupHelper(num, 0, 0, false, res);
 
         return res;
@@ -43,7 +46,7 @@ public class SubsetsII {
         
     }
     public static void main(String args[]){
-    	int[] A = {1,2,2};
+    	int[] A = {4,4,4,1,4};
     	System.out.println(subsetsWithDup(A));
     }
 }
