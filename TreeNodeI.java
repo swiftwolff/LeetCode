@@ -19,6 +19,16 @@ public class TreeNodeI {
 		right.parent = this;
 	}
 	
+	public void preorderPrint(TreeNodeI node){
+		if(node == null){
+			return;
+		}
+		System.out.println(node.val);
+		preorderPrint(node.left);
+		preorderPrint(node.right);
+		
+	}
+	
 	public static void main(String args[]){
 		
 		TreeNodeI root = new TreeNodeI(1);
