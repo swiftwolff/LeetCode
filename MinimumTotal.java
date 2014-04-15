@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class MinimumTotal {
 	
-	public static int minimumTotal(ArrayList<ArrayList<Integer>> triangle){
+	public static int minimumTotal(ArrayList<ArrayList<Integer>> triangle){  //not correct
 		
 		if(triangle.size()==0){
 			return 0;
@@ -19,6 +19,26 @@ public class MinimumTotal {
 	
 		return sum;
 	}
+	
+	public static int minimumTotalTwo(ArrayList<ArrayList<Integer>> triangle) {
+		if(triangle.size()==0){
+			return 0;
+		}
+		int[] pathSum = new int[triangle.size()];
+		int row = triangle.size()-1;
+		
+		for(int i=row;i>-1;i--){
+			for(int j=0;j<triangle.get(i).size();j++){
+				if(i==row){
+					pathSum[j] = triangle.get(row).get(j);  //populate the base
+				}else{
+					pathSum[j] = Math.min(pathSum[j],pathSum[j+1])+triangle.get(i).get(j);  //compares base and update to new col
+				}
+			}
+		}
+		
+        return pathSum[0];
+    }
 	
 	public static void main(String args[]){
 		ArrayList<ArrayList<Integer>> triangle = new ArrayList<ArrayList<Integer>>();
@@ -41,5 +61,6 @@ public class MinimumTotal {
 		triangle.add(c);
 		triangle.add(d);
 		System.out.println(minimumTotal(triangle));
+		System.out.println(minimumTotalTwo(triangle));
 	}
 }
