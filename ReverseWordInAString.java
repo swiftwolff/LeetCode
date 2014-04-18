@@ -56,7 +56,7 @@ public class ReverseWordInAString {
         str[b] = tmp;
     }
     
-    public String reverseWords(String s) {
+    public static String reverseWords(String s) {
 		if (s == null || s.length() == 0) {
 			return "";
 		}
