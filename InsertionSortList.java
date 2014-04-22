@@ -2,26 +2,47 @@
 public class InsertionSortList {
 	
 	public static ListNode insertionSortList(ListNode head) {
-        if(head==null||head.next==null){
+        if (head==null ||head.next==null){
             return head;
         }
-        ListNode zero = new ListNode(0);
-        zero.next = head;
-        ListNode cur = head;
         
-        while(cur!=null && cur.next!=null){
-        	ListNode next = cur.next;
-        	if(next.val<cur.val){
-        		ListNode temp = zero.next;
-        		zero.next = next;
-        		cur.next = next.next;
-        		next.next = temp;
-        		cur = zero.next; //go back to the beginning;
-        	}else{
-        		cur = cur.next;
-        	}
-        } 
-        return zero.next;
+        ListNode preHead=new ListNode (-1);
+        
+        preHead.next=head;
+        ListNode run=head;
+        
+        
+        while (run!=null && run.next!=null){
+            
+            if (run.val>run.next.val){
+                // find node which is not in order
+                ListNode smallNode=run.next;
+                
+                ListNode pre=preHead;
+                
+                // find position for smallNode
+                while (pre.next.val<smallNode.val){
+                    pre=pre.next;
+                }
+                
+                
+                ListNode temp=pre.next;
+                pre.next=smallNode;
+                
+                run.next=smallNode.next;
+                smallNode.next=temp;
+                
+            }
+            else{
+               // node is in order
+               run=run.next;
+                
+            }
+            
+        }
+        
+        return preHead.next;
+        
     }
 	
 	public static void main(String args[]){
