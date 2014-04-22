@@ -1,45 +1,43 @@
 
 public class PartitionList {
 	
-	public static ListNode partition(ListNode head, int x) {  //cheating code, not O(n) solution
+	public static ListNode partition(ListNode head, int x) {
+		//use two ListNode to separate left and right, and connect them together in the end
+        if (head==null || head.next==null){
+            return head;
+        }
+        // leftSide 
+        ListNode preLeftHead=new ListNode (-1);
+        ListNode leftEnd=preLeftHead;
         
-		if(head==null||head.next==null){
-			return head;
-		}
-		ListNode prev = new ListNode(-1);
-		prev.next = head;
-		ListNode prevHead = prev;
-		ListNode cur;
-		
-		while(prev!=null){
-			
-			cur = prev.next;
-			
-			if(cur!=null && cur.val > x){
-				ListNode move = cur.next;
-				ListNode movelast = cur.next;
-				while(move!=null && move.val >= x){
-					movelast = move;
-					move = move.next;
-				}
-				if(move!=null){
-					prev.next = move;
-					movelast.next = move.next;
-					move.next = cur;
-					
-				}else{
-					return prevHead.next;
-				}
-				
-			}else{
-				prev = prev.next;
-				
-			}
-		}
-		return prevHead.next;
-		
+        // rightSide
+        ListNode preRightHead=new ListNode(-1);
+        ListNode rightEnd=preRightHead;
+        
+        ListNode run=head;
+        
+        while (run!=null){
+            ListNode temp=run.next;
+            
+            if (run.val<x){
+                leftEnd.next=run;
+                leftEnd=leftEnd.next;
+            }
+            else{
+                rightEnd.next=run;
+                rightEnd=rightEnd.next;
+                
+            }
+            
+            run.next=null;
+            run=temp;
+        }
+        
+        // connect left and right
+        leftEnd.next=preRightHead.next;
+        
+        return preLeftHead.next;
     }
-	
 	
 	public static void main(String args[]){
 		System.out.println("Hi");
