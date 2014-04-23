@@ -1,5 +1,4 @@
 import java.util.Arrays;
-
 public class NextPermutation {
 
 	public static void nextPermutation(int[] num) {
@@ -10,7 +9,8 @@ public class NextPermutation {
                 reverse(num, i, num.length-1);  
                 // can use normal back to front scan replace bsearch, not slow so much, but bsearch is better
                 int j=bSearch(num, num[i-1]+0.5, i,num.length-1);
-                       
+                
+                
                 int temp=num[j];
                 num[j]=num[i-1];
                 num[i-1]=temp;
@@ -54,8 +54,9 @@ public class NextPermutation {
     }
 
     public static void main(String args[]){
-    	int[] num = {1,3,6,4};
+    	int[] num = {5,4,7,5,3,2};
     	nextPermutation(num);
+//    	Arrays.sort(num,1,4);
     	for(int i:num){
     		System.out.println(i);
     	}
