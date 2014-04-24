@@ -57,9 +57,10 @@ public class AddBinary {
 		 int carry = 0;
 		 
 		 while(lastA>=0||lastB>=0||carry>0){
-			 int num1= lastA>=0? a.charAt(lastA--)-'0':0;  //what is this?
-			 int num2 = lastB>=0? b.charAt(lastB--)-'0':0; //what is this?
+			 int num1= lastA>=0? a.charAt(lastA--)-'0':0;  //
+			 int num2 = lastB>=0? b.charAt(lastB--)-'0':0; //pad 0 to lastBs
 			 int current = (num1+num2+carry)%2;
+			 carry = (num1+num2+carry)/2;
 			 
 			 sb.insert(0,current);
 		 }
@@ -68,13 +69,13 @@ public class AddBinary {
 	 }
 	
 	public static void main(String args[]){
-		String a = "1";
-		String b = "111";
-//		System.out.println(addBinary(a,b));
-		System.out.println('1'-'0');
+		String a = "0";
+		String b = "0";
+		System.out.println(addBinary(a,b));
+//		System.out.println('1'-'0');
 //		System.out.println(BinaryToInt(a));
 //		System.out.println(BinaryToInt(b));
 //		System.out.println(addBinary(a,b));
-		
+//		System.out.println(b.charAt(-2));
 	}
 }
