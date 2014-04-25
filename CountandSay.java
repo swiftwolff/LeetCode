@@ -28,6 +28,17 @@ public class CountandSay {
     
     public static void main(String args[]){
     	
-    	System.out.println(countAndSay(6));
+//    	System.out.println(countAndSay(6));
+    	int[] a = {1,1,1,1,1,1,1,1,1,1,7};
+    	for(int i=0;i<a.length;i++){
+    		while(i<a.length-1 && a[i]==a[i+1]){
+    			i++;
+    		}
+//    		System.out.println(i);
+    		System.out.println(a[i]);
+    	}
+    	
+    	
+    	
     }
 }
