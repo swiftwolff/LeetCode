@@ -1,34 +1,53 @@
-
+import java.util.Scanner;
 public class Solution {
-	public static int reverse(int x){
-		int[] rev;
-		int tmp = x;
-		int c = 0;
-		int t;
-		double ans = 0;
+	public void answer(){
+		System.out.println("Enter inputs belw:");
 		
-		while(tmp != 0){
-			tmp/=10;
-			c++;
+	    Scanner in = new Scanner(System.in);
+	    int m = in.nextInt();
+	    int n = in.nextInt();
+	    
+	    int[][] matrix = new int[m][n];
+	    for(int i=0;i<m;i++){ //row
+	    	for(int j=0;j<n;j++){ //col
+	    		matrix[i][j] = in.nextInt();
+	    	}
+	    }
+	    int[][] minTime = timeCal(matrix,m,n);
+	    int employees = in.nextInt();
+	    int[] answer = new int[employees];
+	    for(int i=0;i<employees;i++){
+	    	int employeesRow = in.nextInt();
+	    	int employeesCol = in.nextInt();
+	    	answer[i] = minTime[employeesRow][employeesCol];
+	    }
+	    
+	    for(int i:answer){
+	    	System.out.println(i);
+	    }
+	}
+	
+	public int[][] timeCal(int[][] matrix, int m, int n){
+		
+		for(int i=m-2;i>-1;i--){
+			matrix[i][n-1] += matrix[i+1][n-1];
 		}
 		
-		rev = new int[c];
-		for(int i=0;i<c;i++){
-			rev[i] = x % 10;
-			x/=10;
+		for(int j=n-2;j>-1;j--){
+			matrix[m-1][j] += matrix[m-1][j+1];
 		}
 		
-		t = c-1;
-		for(int i=0;i<c;i++){
-			ans += rev[i]*Math.pow(10,t--);
+		for(int i=m-2;i>-1;i--){
+			for(int j=n-2;j>-1;j--){
+				matrix[i][j] += Math.min(matrix[i][j+1], matrix[i+1][j]); 
+			}
 		}
 		
-		return (int) ans;
-		
-		
+		return matrix;
 	}
 	
 	public static void main(String args[]){
-		System.out.println(Solution.reverse(-123));
+		Solution s = new Solution();
+		s.answer();
 	}
 }
