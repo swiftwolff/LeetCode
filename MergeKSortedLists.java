@@ -42,11 +42,56 @@ public class MergeKSortedLists {
 			return pre;
     }
 	
-//	public ListNode mergeKLists(ArrayList<ListNode> lists) {
-//		
-//		
-//		
-//	}
+	public ListNode mergeKLists(ArrayList<ListNode> lists) {
+		
+		if (lists.size()==0){
+			return null;
+		}
+		
+		return divider(lists,0,lists.size()-1);
+	}
+	
+	public ListNode divider(ArrayList<ListNode> lists, int start, int end){	
+		if(start >= end){
+			return lists.get(start);
+		}
+		int mid = (start + end)/2;
+		ListNode ans= merge(divider(lists,start,mid),divider(lists,mid+1,end));
+
+		return ans;
+	}
+	
+	public ListNode merge(ListNode a, ListNode b){
+		
+		if(a==null&&b==null){
+			return null;
+		}
+		if(a==null||b==null){
+			return a==null?b:a;
+		}
+		
+		ListNode one = a;
+		ListNode two = b;
+		ListNode prev = new ListNode(-1);
+		ListNode head = prev;
+		while(one!=null && two!=null){	
+			
+			if(one.val <= two.val){
+				prev.next = one;
+				one = one.next;
+				prev = prev.next;
+			}else{
+				prev.next = two;
+				two = two.next;
+				prev = prev.next;
+			}
+			
+		}	
+		
+		prev.next = one==null?two:one;
+		
+		return head.next;
+	}
 	
 	
 	
@@ -65,7 +110,7 @@ public class MergeKSortedLists {
 		
 		MergeKSortedLists solution = new MergeKSortedLists();
 		ListNode ans = solution.mergeKListsWithPriorityQueue(store);
-		
+//		ListNode c = solution.merge(a, b);
 		ReverseLinkedList.printList(ans);
 		
 		
