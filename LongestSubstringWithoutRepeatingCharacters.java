@@ -25,12 +25,6 @@ public class LongestSubstringWithoutRepeatingCharacters {
 					i++;
 				}
 				
-//			if(i==j-1){
-//				alphebat[s.charAt(i)] = false;  //didn't clean
-//				ans = Math.max(ans, count);
-//				i = j;
-//				count=0;
-//			}
 			}else{
 				alphebat[s.charAt(j)] = true;
 				j++;
