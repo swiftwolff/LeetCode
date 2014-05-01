@@ -1,6 +1,5 @@
 import java.util.Arrays;
 
-
 public class BestTimeToBuyAndSellStockIII {
 	
 	public int maxProfit(int[] prices) {
