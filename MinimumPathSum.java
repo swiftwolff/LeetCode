@@ -1,44 +1,46 @@
 
 public class MinimumPathSum {
 	
-	public static int minPathSum(int[][] grid) {
-		
-		if (grid.length==0||grid[0].length==0){
-			return 0;
-		}
-		
-		int[][] sumgrid = new int[grid.length][grid[0].length];
-		int j = 0;
-		sumgrid[0][0] = grid[0][0];
-		//horizontal
-		for (int i=1;i<grid[0].length;i++){
-			sumgrid[j][i] = grid[j][i]+sumgrid[j][i-1];
-		}
-		//vertical
-		for (int k=1;k<grid.length;k++){
-			sumgrid[k][j] = grid[k][j]+sumgrid[k-1][j];
-		}
-		
-		if(grid.length==1||grid[0].length==1){
-			return sumgrid[grid.length-1][grid[0].length-1];
-		}
-		int x = 1;
-		int y = 1;
-
-		while(x<grid[0].length && y<grid.length){
-			sumgrid[y][x] = grid[y][x]+Math.min(grid[y-1][x], grid[y][x-1]);
-			if(x+1==grid[0].length){
-				y++;
-				x--;
-			}else{
-				x++;
-			}
-		}
-		return sumgrid[grid.length-1][grid[0].length-1];
-    }
+	 public static int minPathSum(int[][] grid) {
+	        if(grid.length==0||grid[0].length==0){
+	            return -1;
+	        }
+	        
+	        if(grid.length==1||grid[0].length==1){
+	        	int sum = 0;
+	        	if(grid[0].length==1){
+	        		for(int i=0;i<grid.length;i++){
+	        			sum+=grid[i][0];
+	        		}
+	        		return sum;
+	        	}
+	        	if(grid.length==1){
+	        		for(int j=0;j<grid[0].length;j++){
+	        			sum+=grid[0][j];
+	        		}
+	        		return sum;
+	        	}
+	        }
+	        
+	        for(int i=grid.length-2;i>-1;i--){
+	        	grid[i][grid[0].length-1] += grid[i+1][grid[0].length-1];
+	        }
+	        
+	        for(int j=grid[0].length-2;j>-1;j--){
+	        	grid[grid.length-1][j] += grid[grid.length-1][j+1];
+	        }
+	         
+	        for(int i=grid.length-2;i>-1;i--){
+	            for(int j=grid[0].length-2;j>-1;j--){
+	                grid[i][j] = grid[i][j] + Math.min(grid[i+1][j],grid[i][j+1]);
+	            }
+	        }
+	        
+	     return grid[0][0];   
+	    }
 	
 	public static void main(String args[]){
-		int[][] grid = {{8},{9},{10}};
+		int[][] grid = {{1,3,1},{1,5,1},{4,2,1}};
 		System.out.println(minPathSum(grid));
 	}
 }
