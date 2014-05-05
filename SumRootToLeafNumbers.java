@@ -18,7 +18,6 @@ public class SumRootToLeafNumbers {
         if(root.left ==null && root.right==null){
         	return stack.pop()*10+root.val;
         }
-        
         int left = 0;
         int right = 0;
         if(root.right==null){
