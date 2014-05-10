@@ -1,54 +1,44 @@
 
 public class RecoverBinarySearchTree {
-	
-	
-	public void recoverTree(TreeNode root) {
-        
-		
-		
-		
-		
-		
-		
-    }
-	
-	public TreeNode recoverTreeHelper(TreeNode root){
-		if(root.left==null && root.right==null){
-			return null;
-		}	
-		if(root.left==null || root.right==null){
-			return root.left==null? recoverTreeHelper(root.right):recoverTreeHelper(root.left);
-		}	
-		TreeNode left = null;
-		TreeNode right =null;
-		if(root.left!=null && root.right!=null){
-			if(root.left.val>=root.val||root.right.val <= root.val){
-				return root;
-			}else{
-				left = recoverTreeHelper(root.left);
-				right = recoverTreeHelper(root.right);
-			}
-		}	
-		if(left==null||right==null){
-			return null;
-		}
-		int tmp = 0;
-		tmp = left.val;
-		left.val = right.val;
-		right.val = tmp;
-		return root;
-		
-	}
-	
-	public void swapTreeNode(TreeNode one, TreeNode two){
-		
-		
-		
-		
-	}
+
+	TreeNode p,q;  
+	TreeNode pre;  
+	public  void  recoverTree(TreeNode root) {  
+		        if  (root ==  null )  return ;  
+		        getWrong(root);  
+		        int  tmp = p.val;  
+		        p.val = q.val;  
+		        q.val = tmp;  
+	}  
+  
+	public  void  getWrong(TreeNode root) {  
+		        if  (root ==  null )  return ;  
+		        getWrong(root.left);  
+		        if  (pre !=  null  && root.val < pre.val) {  
+		            if  (p ==  null ) {  
+		                p = pre;  
+		                q = root;  
+		            }  
+		            else   
+		                q = root;  
+		        }  
+		        pre = root;  
+		        getWrong(root.right);  
+	} 
 	
 	
 	public static void main(String args[]){
+		TreeNode root = new TreeNode(3);
+//		root.left = new TreeNode(1);
+//		root.left.left = new TreeNode(7);
+//		root.left.right = new TreeNode(4);
+		root.right = new TreeNode(2);
+//		root.right.left = new TreeNode(2);
+		root.right.right = new TreeNode(1);
+		RecoverBinarySearchTree solution = new RecoverBinarySearchTree();
+		solution.recoverTree(root);
+		
+		root.preorder(root);
 		
 	}
 }
