@@ -11,7 +11,7 @@ public class TrappingRainWater {
         int[] left = new int[A.length];
         //max state from right to left
         int[] right = new int[A.length];
-        System.out.println(Arrays.toString(A));
+
         left[0] = A[0];
         for(int i=1;i<A.length;i++){
             left[i] = Math.max(left[i-1],A[i]);
@@ -20,8 +20,6 @@ public class TrappingRainWater {
         for(int i=A.length-2;i>-1;i--){
             right[i] = Math.max(right[i+1],A[i]);
         }
-        System.out.println(Arrays.toString(left));
-        System.out.println(Arrays.toString(right));
         int sum = 0;
         for(int i=1;i<A.length-1;i++){
             sum+= Math.min(left[i],right[i])-A[i];

@@ -31,7 +31,7 @@ public class Permutation {
 	
 	public static void main(String args[]){
 		Permutation solution = new Permutation();
-		System.out.println(solution.permute("abcd").size());
+		System.out.println(solution.permute("abc").size());
 		
 	}
 	
