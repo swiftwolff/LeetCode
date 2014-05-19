@@ -4,19 +4,26 @@ import java.util.LinkedList;
 public class PalantirPhoneInterview {
 	LinkedList<Integer> stack = new LinkedList<Integer>();
 	LinkedList<Integer> min = new LinkedList<Integer>();
+	
 	public void push(int num){
-		int tmp = min.peekLast();
-		if(num < tmp){
-			min.add(num);	
-		}else{
-			min.removeLast();
+		if(stack.isEmpty() && min.isEmpty()){
+			stack.add(num);
 			min.add(num);
-			min.add(tmp);
+			return;
 		}
-		stack.add(num);
+		if(num < min.peekLast()){
+			min.add(num);
+			stack.add(num);
+		}else{
+			stack.add(num);
+			int tmp = min.peekLast();
+			min.add(tmp);
+			}
+		return;
 	}
 	
 	public int pop(){
+		min.removeLast();
 		return stack.removeLast();
 	}
 	
@@ -32,7 +39,14 @@ public class PalantirPhoneInterview {
 		PalantirPhoneInterview solution = new PalantirPhoneInterview();
 		solution.push(4);
 		solution.push(5);
+		solution.push(0);
 		solution.push(1);
-		System.out.println(solution.peek());
+		solution.push(10);
+		
+		solution.pop();
+		solution.pop();
+
+		System.out.println(solution.minPeek());
+
 	}
 }
