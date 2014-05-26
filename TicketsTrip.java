@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Stack;
 public class TicketsTrip {
 	//FE,BD,AC,DF,CB
 	static class StartEnd{
@@ -16,16 +19,32 @@ public class TicketsTrip {
 		StartEnd d = new StartEnd("D","F");
 		StartEnd e = new StartEnd("C","B");
 		
-		ArrayList<StartEnd> deck = new ArrayList<StartEnd>();
-		deck.add(a);
-		deck.add(b);
-		deck.add(c);
-		deck.add(d);
-		deck.add(e);
-		
-		
-		
-		
+		HashMap<String,String> trip = new HashMap<String,String>();
+		trip.put(a.start, a.end);
+		trip.put(b.start, b.end);
+		trip.put(c.start, c.end);
+		trip.put(d.start, d.end);
+		trip.put(e.start, e.end);
+		//find start and end locations by counting the numbers of appearance and then DFS		
+		for(String s:trip.keySet()){
+			ArrayList<ArrayList<String>> tripOrder = new ArrayList<ArrayList<String>>();
+			while(trip.containsKey(trip.get(s))){
+				ArrayList<String> ticket = new ArrayList<String>();
+				ticket.add(s);
+				ticket.add(trip.get(s));
+				tripOrder.add(ticket);
+				s = trip.get(s);
+			}
+			ArrayList<String> ticket = new ArrayList<String>();
+			ticket.add(s);
+			ticket.add(trip.get(s));
+			tripOrder.add(ticket);
+			if(tripOrder.size()==trip.size()) System.out.println(tripOrder);
+		}
+				
 	}
+		
+		
+		
 	
 }
