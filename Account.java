@@ -21,5 +21,8 @@ public class Account {
 	public void unlock(){
 		flag.freeBusyFlag();
 	}
-	
+	public static void main(String args[]){
+		int hi = (int) Math.ceil((double)5/2);
+		System.out.println(hi);
+	}
 }

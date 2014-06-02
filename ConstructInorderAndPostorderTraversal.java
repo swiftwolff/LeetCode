@@ -26,8 +26,9 @@ public class ConstructInorderAndPostorderTraversal {
         
         
         root.left = buildTreeHelper(postorder,postStart,postStart+k-(inStart+1),inorderTable,inStart,k-1);
+        // Becuase k is not the length, it it need to -(inStart+1) to get the length
         root.right = buildTreeHelper(postorder,postStart+k-inStart,postEnd-1,inorderTable,k+1,inEnd);
-        
+        // postStart+k-inStart = postStart+k-(inStart+1) +1
         return root;
     }
 	    
