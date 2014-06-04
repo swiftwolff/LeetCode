@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class FirstMissingPositive {
 	
 	public int firstMissingPositive(int[] A) {
@@ -29,8 +31,9 @@ public class FirstMissingPositive {
 		A[b] = tmp;
 	}
 	
+	
 	public static void main(String args[]){
-		int[] A = {1,0};
+		int[] A = {2,1};
 		FirstMissingPositive solution = new FirstMissingPositive();
 		System.out.println(solution.firstMissingPositive(A));
 	}
